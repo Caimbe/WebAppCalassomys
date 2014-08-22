@@ -3,12 +3,8 @@
 #include <iostream>
 using namespace std;
 
-WebApp::WebApp()
+WebApp::WebApp(cppcms::service &srv) : cppcms::application(srv)
 {
-    configure();
+
 }
 
-void WebApp::configure()
-{
-    cout << "loading ";
-}
