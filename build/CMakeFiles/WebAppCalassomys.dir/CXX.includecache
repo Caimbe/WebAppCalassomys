@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+.././include/appmanager.h
+iostream
+-
+include
+-
+
+/home/ubuntu/workspace/WebAppCalassomys/src/appmanager.cpp
+include/appmanager.h
+/home/ubuntu/workspace/WebAppCalassomys/src/include/appmanager.h
+
