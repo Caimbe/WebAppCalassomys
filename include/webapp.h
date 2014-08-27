@@ -5,18 +5,23 @@
 #include <cppcms/url_mapper.h>
 #include <cppcms/http_request.h>
 #include <cppcms/http_response.h>
-#include "iwebappconfig.h"
+
+using namespace std;
+
+namespace calassomys {
 
 class WebApp : public cppcms::application
 {
 public:
-    WebApp(cppcms::service& srv);
-    template<typename func>
-    void map_dispatcher(std::string path, func)
-    {
+    WebApp(cppcms::service& service);
+    virtual ~WebApp();
 
-    }
 };
+typedef WebApp* WebAppPtr;
+
+}
+
+extern "C" calassomys::WebAppPtr create(cppcms::service& srv);
 
 
 #endif // WEBAPP_H

@@ -1,10 +1,14 @@
 #include "include/webapp.h"
 
-#include <iostream>
-using namespace std;
+namespace calassomys {
 
 WebApp::WebApp(cppcms::service &srv) : cppcms::application(srv)
+{
+}
+
+WebApp::~WebApp()
 {
 
 }
 
+}
