@@ -16,12 +16,24 @@ public:
     WebApp(cppcms::service& service);
     virtual ~WebApp();
 
+    void attach(WebApp* webapp, string url="")
+    {
+        const char* name = typeid(*webapp).name()+1;
+        url = url.length()?url:name;
+        cppcms::application::attach(webapp,
+        name,
+        url+"{1}", // mapping
+        url+"(/(.*))?", 1);   // dispatching
+    }
+
 };
 typedef WebApp* WebAppPtr;
 
 }
 
-extern "C" calassomys::WebAppPtr create(cppcms::service& srv);
+extern "C" calassomys::WebAppPtr create(cppcms::service& srv, std::string& name);
+
+#define WEBCONTENT "WebContent"
 
 
 #endif // WEBAPP_H
