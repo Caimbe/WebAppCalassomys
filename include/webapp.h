@@ -19,7 +19,12 @@ public:
     void attach(WebApp* webapp, string url="")
     {
         const char* name = typeid(*webapp).name()+1;
-        url = url.length()?url:name;
+        if(url.length())
+            url = url;
+        else{
+            url = "/";
+            url += name;
+        }
         cppcms::application::attach(webapp,
         name,
         url+"{1}", // mapping
@@ -30,10 +35,5 @@ public:
 typedef WebApp* WebAppPtr;
 
 }
-
-extern "C" calassomys::WebAppPtr create(cppcms::service& srv, std::string& name);
-
-#define WEBCONTENT "WebContent"
-
 
 #endif // WEBAPP_H
