@@ -2,12 +2,13 @@
 #define LOADWEBAPP_H
 
 #include <webapp.h>
+#include <cppcms/json.h>
 
 namespace calassomys {
 
 class LoadWebApp : public WebApp
 {
-    std::string nameWebApp;
+    cppcms::json::value settings;
 public:
     LoadWebApp(cppcms::service &srv, std::string& nameWebApp);
     void serveFile(std::string file_name);

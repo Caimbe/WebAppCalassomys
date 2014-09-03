@@ -6,7 +6,12 @@ namespace calassomys {
 
 LoadWebApp::LoadWebApp(cppcms::service &srv, std::string& nome) : calassomys::WebApp(srv)
 {
-    nameWebApp = nome;
+    settings = cppcms::application::settings();
+    string webContentPath = settings.get<string>("calassomys.path_webapps")+"/"+nome + "/"+settings.get<string>("calassomys.webcontent")+"/";
+    settings.set("calassomys.webapp.web_content_path", webContentPath);
+    settings.set("calassomys.webapp.name", nome);
+    settings.set("calassomys.webapp.path", settings.get<string>("calassomys.path_webapps")+"/"+nome+"/" );
+
     loader();
     dispatcher().assign("/(.*)",&LoadWebApp::serveFile,this,1);
 }
@@ -14,13 +19,14 @@ LoadWebApp::LoadWebApp(cppcms::service &srv, std::string& nome) : calassomys::We
 
 void LoadWebApp::serveFile(std::string file_name)
 {
-    file_name = file_name.length()?file_name:settings().get<string>("calassomys.index_page");
-    const char* name = (settings().get<string>("calassomys.path_webapps")+"/"+nameWebApp + "/"+settings().get<string>("calassomys.webcontent")+"/" + file_name).c_str();
+    file_name = file_name.length()?file_name:settings.get<string>("calassomys.index_page");
+    const char* name = (settings.get<string>("calassomys.webapp.web_content_path")+file_name).c_str();
     std::ifstream f(name);
     if(!f) {
         response().status(404);
     }
     else {
+        response().content_type( request().content_type() );
         response().out() << f.rdbuf();
     }
 }

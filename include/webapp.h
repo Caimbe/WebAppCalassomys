@@ -5,6 +5,7 @@
 #include <cppcms/url_mapper.h>
 #include <cppcms/http_request.h>
 #include <cppcms/http_response.h>
+#include <cppcms/json.h>
 
 using namespace std;
 
@@ -12,7 +13,10 @@ namespace calassomys {
 
 class WebApp : public cppcms::application
 {
+protected:
+    cppcms::json::value config;
 public:
+    WebApp(cppcms::service& service, cppcms::json::value& cfg);
     WebApp(cppcms::service& service);
     virtual ~WebApp();
 
