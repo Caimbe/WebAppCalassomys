@@ -8,17 +8,20 @@
 #include <cppcms/json.h>
 
 using namespace std;
+using namespace cppcms;
 
 namespace calassomys {
 
 class WebApp : public cppcms::application
 {
 protected:
-    cppcms::json::value config;
+    static cppcms::json::value config;
 public:
     WebApp(cppcms::service& service, cppcms::json::value& cfg);
     WebApp(cppcms::service& service);
     virtual ~WebApp();
+
+    static json::value getConfig();
 
     void attach(WebApp* webapp, string url="")
     {
