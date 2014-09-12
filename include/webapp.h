@@ -25,7 +25,7 @@ public:
 
     void attach(WebApp* webapp, string url="")
     {
-        const char* name = typeid(*webapp).name()+1;
+        string name = typeid(*webapp).name()+1;
         if(url.length())
             url = url;
         else{

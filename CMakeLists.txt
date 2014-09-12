@@ -2,11 +2,11 @@ project(WebAppCalassomys)
 cmake_minimum_required(VERSION 2.8)
 include_directories(. include)
 aux_source_directory(src SRC)
-aux_source_directory(include INCLUDE)
+aux_source_directory(./include INCLUDE)
 list(APPEND FULL_SRC
     ${SRC}
     ${INCLUDE} )
-add_library(${PROJECT_NAME} STATIC ${FULL_SRC} )
+add_library(${PROJECT_NAME} STATIC ${FULL_SRC} ${INCLUDE})
 target_link_libraries(${PROJECT_NAME} cppcms booster htmlcxx )
 
 if(UNIX)
